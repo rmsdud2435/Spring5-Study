@@ -1,0 +1,6 @@
+package com.myproject.spring5.accessmodifier;
+
+private class PrivateClass {
+
+	public string publicString = "";
+}

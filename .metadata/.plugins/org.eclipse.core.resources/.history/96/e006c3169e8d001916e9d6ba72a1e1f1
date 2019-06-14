@@ -1,0 +1,22 @@
+package com.myproject.spring5.accessmodifier;
+
+public class PublicClass {
+	public 	String publicString 	= "public";	
+
+	public String print(){
+		String a = "";
+		
+		
+		return a;
+	}
+	
+	public String getPublicString() {
+		return publicString;
+	}
+
+	public void setPublicString(String publicString) {
+		Calendar calendar = Calendar.getInstance();
+
+		this.publicString = publicString + ;
+	}
+}

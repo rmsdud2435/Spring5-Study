@@ -1,0 +1,11 @@
+package com.myproject.spring5.accessmodifier;
+
+public class PublicClass {
+	public 	String publicString 	= "public";
+	private String privateString 	= "private";
+	
+	public String printNameAndTime(){
+		
+		return a;
+	}
+}

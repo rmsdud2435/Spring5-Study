@@ -1,0 +1,5 @@
+package com.myproject.spring5.accessmodifier;
+
+public class PrivateClass {
+
+}
