@@ -24,7 +24,7 @@ public class SFtpService {
 	private JSch 		jsch;
 	private Session 	session;
 	private Channel 	channel;
-	private ChannelSftp  channelSftp;
+	private ChannelSftp channelSftp;
 	
 	public SFtpService(){
 		logger.info("SFtpService is autowired");
@@ -111,7 +111,6 @@ public class SFtpService {
 	}
 	
 	public void disconnect(){
-		
 		channelSftp.quit();
 	    session.disconnect();
 	    logger.info("SFtpService is successfuly ended");

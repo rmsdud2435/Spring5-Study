@@ -27,12 +27,17 @@
 <fullyQualifiedTypeName name="com.jcraft.jsch.Session"/>
 <fullyQualifiedTypeName name="com.jcraft.jsch.Channel"/>
 <fullyQualifiedTypeName name="com.jcraft.jsch.ChannelSftp"/>
-<fullyQualifiedTypeName name="java.io.FileInputStream"/>
 <fullyQualifiedTypeName name="com.jcraft.jsch.SftpException"/>
 <fullyQualifiedTypeName name="java.io.FileNotFoundException"/>
-<fullyQualifiedTypeName name="java.io.InputStream"/>
 <fullyQualifiedTypeName name="java.io.File"/>
 <fullyQualifiedTypeName name="org.apache.commons.io.FileUtils"/>
 <fullyQualifiedTypeName name="com.myproject.spring5.util.extentions.ajax.AjaxUtils"/>
 <fullyQualifiedTypeName name="com.myproject.spring5.mvc.convert.MaskFormat"/>
+<fullyQualifiedTypeName name="java.io.FileInputStream"/>
+<fullyQualifiedTypeName name="java.io.BufferedOutputStream"/>
+<fullyQualifiedTypeName name="java.io.FileOutputStream"/>
+<fullyQualifiedTypeName name="java.io.InputStream"/>
+<fullyQualifiedTypeName name="com.myproject.spring5.accessmodifier.AccessModifierTest.PublicClass"/>
+<fullyQualifiedTypeName name="java.util.Calendar"/>
+<fullyQualifiedTypeName name="org.apache.logging.log4j.core.util.JsonUtils"/>
 </qualifiedTypeNameHistroy>

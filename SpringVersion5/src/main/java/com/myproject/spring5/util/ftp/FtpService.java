@@ -1,31 +1,39 @@
 package com.myproject.spring5.util.ftp;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+
 public class FtpService {
 
 	static final Logger logger = LogManager.getLogger(FtpService.class);
+	
+	private FTPClient 	ftpClient;
 	
 	public FtpService(){
 		logger.info("FtpService is autowired");
 	}
 	
-	
-	public FTPClient setContext(FtpContext ftpContext){
+	public void setContext(FtpContext ftpContext){
 		
-		String 	serverIP = ftpContext.getServerIP();
-		int		port = ftpContext.getPort();
-		String 	userId = ftpContext.getUserId();
-		String	password = ftpContext.getPassword();
+		String 	serverIP	= ftpContext.getServerIP();
+		int		port 		= ftpContext.getPort();
+		String 	userId 		= ftpContext.getUserId();
+		String	password 	= ftpContext.getPassword();
 		
-		FTPClient 	ftpClient 	= new FTPClient();			
-		int 		reply;
+		ftpClient = new FTPClient();			
+		
+		int reply;
 		
 		try{
 			ftpClient.connect(serverIP, port);
@@ -45,21 +53,76 @@ public class FtpService {
 			
 			ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
 			ftpClient.enterLocalActiveMode();
+			ftpClient.setControlEncoding("UTF-8");
 			
 			logger.info("ftp accessed successfully....");
 		}catch(Exception e){
 			logger.error("Error occured while setting ftp context....");
-		} finally {
+			
 			if(ftpClient!=null && ftpClient.isConnected()){
 				try{ 
 					ftpClient.disconnect(); 
 				} 
-				catch(IOException e){
+				catch(IOException ioe){
 					logger.error("Fail to disconnect!");
 				}
 			}
 		}
-		return ftpClient;
+	}
+	
+	public void uploadFile(String filePath, String fileName, String uploadPath) throws IOException {
+
+        FileInputStream in = null;
+        
+        ftpClient.changeWorkingDirectory(uploadPath);
+        	
+        in = new FileInputStream(filePath + fileName);
+        boolean sucess = ftpClient.storeFile(fileName, in);
+            
+        if(sucess){
+        	logger.info("파일을 성공적으로 업로드 하였습니다.");
+        }else{
+            logger.error("파일을 업로드하지 못하였습니다.");
+        }
+	}
+	
+    /**
+     * @param filePath 다운로드 할 파일 위치
+     * @param fileName 다운로드 할 파일 명
+     * @param downloadPath 다운로드 될 위치
+     * @throws IOException 
+     * @throws FileNotFoundException 
+     */
+	public void downloadFile(String filePath, String fileName, String downloadPath) throws IOException {
+
+		InputStream  inputstream = null;
+        
+		ftpClient.changeWorkingDirectory(filePath);
+			
+		inputstream = ftpClient.retrieveFileStream(fileName);
+			
+	    File file = new File(downloadPath + fileName);
+	    FileUtils.copyInputStreamToFile(inputstream, file);
+			
+		boolean success = ftpClient.completePendingCommand();
+			
+		if(success){
+			logger.info("파일을 성공적으로 가져왔습니다.");
+		}else{
+			logger.error("파일을 가져오는데 에러가 발생하였습니다.");
+			throw new FileNotFoundException("Cannot find file for download");
+		}
+	}
+	
+	public void disconnect(){
+		if(ftpClient!=null && ftpClient.isConnected()){
+			try{ 
+				ftpClient.disconnect(); 
+			} catch(IOException e){
+				logger.error("FTP 연결 종료 중 알 수 없는 에러가 발생하였습니다.");
+			}
+		}
+	    logger.info("FtpService is disconnected successfuly");
 	}
 	
 }

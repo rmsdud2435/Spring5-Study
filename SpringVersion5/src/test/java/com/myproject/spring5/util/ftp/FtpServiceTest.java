@@ -18,11 +18,13 @@ public class FtpServiceTest {
 	public void testFtpConnetion(){
 
 		FtpContext ftpContext = new FtpContext();
-		ftpContext.setServerIP("10.46.54.14");
+		ftpContext.setServerIP("10.46.49.31");
 		ftpContext.setPort(22);
-		ftpContext.setUserId("wasadmin");
-		ftpContext.setPassword("!adt0305");
+		ftpContext.setUserId("adtkorea.com₩kr_erp_ftp");
+		ftpContext.setPassword("!att$1adm");
 		
-		ftpService.setContext(ftpContext);
+
+			ftpService.setContext(ftpContext);
+
 	}
 }
