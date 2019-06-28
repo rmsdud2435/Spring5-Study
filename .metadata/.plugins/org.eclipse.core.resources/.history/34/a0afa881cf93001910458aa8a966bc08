@@ -1,0 +1,5 @@
+package com.myproject.spring5.util.ajax;
+
+public class AjaxUtils {
+
+}

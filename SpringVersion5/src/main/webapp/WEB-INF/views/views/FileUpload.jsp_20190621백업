@@ -1,0 +1,107 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>file-upload</title>
+	<link href="<c:url value="/resources/form.css" />" rel="stylesheet"  type="text/css" />		
+	<link href="<c:url value="/resources/jqueryui/1.8/themes/base/jquery.ui.core.css" />" rel="stylesheet" type="text/css"/>
+	<link href="<c:url value="/resources/jqueryui/1.8/themes/base/jquery.ui.theme.css" />" rel="stylesheet" type="text/css"/>
+	<link href="<c:url value="/resources/jqueryui/1.8/themes/base/jquery.ui.tabs.css" />" rel="stylesheet" type="text/css"/>
+		
+	<style>
+		.fileDrop{
+			width : 450px;
+			height : 120px;
+			border : 2px dotted gray;
+			background-color : gray;
+		
+		}
+		
+		.align-center { 
+			text-align: center;
+			vertical-align: middle; 
+		}
+
+	</style>
+	<script type="text/javascript" src="<c:url value="/resources/jquery/1.6/jquery.js" />"></script>
+
+</head>
+<body>
+<div class="container">
+	<div class="write_area">
+		<div>
+			<input type="button" id="addFileBtn" value="파일추가">
+			<input type="button" id="delFileBtn" value="파일삭제">
+			<div id="fileArea" class="fileDrop align-center">
+				<h3>첨부하실 파일을 끌어다 넣어 주세요</h3>
+			</div>
+		</div>
+	</div>
+		<div id="fileDiv">
+			<p>
+				<<!-- input type="file" name="file_0" /> --> <a href="#this" name="delete" class="btn">삭제하기</a>
+			</p>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="<c:url value="/resources/jquery/jquery-2.1.4.min.js" />"></script>
+<script>
+	var g_count =1;
+
+	$(document).ready(function() {
+ 		$("#addFileBtn").click(function(e){
+			e.preventDefault();
+			fn_fileAdd();
+		});
+		
+ 		/* 
+ 			웹브라우저에서 기본적으로 모든 영역에 드래그 앤 드랍 이벤트가 만들어져 있다.ex)파일 저장,해당 파일로 이동 등. 
+ 			그 기본 이벤트들을 우선적으로 제거
+ 			그 후 업로드 로직 추가
+ 		*/
+		$("#fileArea").on("dragenter dragover", function(event){
+ 			event.preventDefault();
+ 		});
+		$("#fileArea").on("drop", function(event){
+ 			event.preventDefault();
+ 			
+ 			var files = event.originalEvent.dataTransfer.files;
+ 			var file = files[0];
+ 			console.log(file);
+ 			
+ 			var formData = new FormData();
+ 			formData.append("file", file);
+ 			
+ 			$.ajax({
+ 				url : '../fileupload/post',
+ 				data : formData,
+ 				dataType : 'test',
+ 				processData : false,
+ 				contentType : false,
+ 				type : 'POST',
+ 				success : function(data){
+ 					console.log(data);
+ 				}
+ 			})
+ 		});
+	})
+
+	function fn_fileAdd() {
+		console.log("upload File counts is >>>>>> " + g_count);
+		var str = "<p><input type='file' name='file_" + (g_count++)
+				+ "'/><a href='#this' name='delete' class='btn'>삭제하기</a></p> ";
+		$("#fileDiv").append(str);
+
+		$("a[name='delete']").click(function(e){
+			e.preventDefault();
+			fn_fileDelete($(this));
+		})
+	}
+</script>
+
+</body>
+</html>
