@@ -31,7 +31,7 @@
 		<li><a href="#convert">Type Conversion</a></li>
 		<li><a href="#validation">Data 검증하기</a></li>
 		<li><a href="<c:url value="/form" />" title="forms">Forms</a></li>
-		<li><a href="<c:url value="/fileupload" />" title="fileupload">File Upload</a></li>
+		<li><a href="#fileupload">File Upload</a></li>
 		<li><a href="#exceptions">Exception Handling</a></li>
 		<li><a href="#redirect">Redirecting 해보기</a></li>
         <li><a href="#async">Async Requests</a></li>
@@ -190,6 +190,18 @@
 			</li>
 		</ul>	
 	</div>
+	<div id="fileupload">
+		<h2>FileUpload 하기</h2>
+		<ul>
+			<li>
+				<a id="moveToUploadPage" href="<c:url value="/views/fileupload" />">파일업로드 페이지로 이동</a>
+			</li>
+			<li>
+				<a id="validateErrors" class="textLink" href="<c:url value="/validate?number=3&date=2010-07-01" />">검증 실패하기</a>
+			</li>
+		</ul>	
+	</div>
+	
 	<div id="messageconverters">
 		<h2>Content-type 변환하기</h2>
 		<div id="stringMessageConverter">

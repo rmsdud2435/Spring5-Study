@@ -120,6 +120,12 @@
 			<version>2.5</version>
 		</dependency>
 		
+		<dependency>
+			<groupId>org.imgscalr</groupId>
+			<artifactId>imgscalr-lib</artifactId>
+			<version>4.2</version>
+		</dependency>
+		
 		<!-- Valid Annotation을 이용한 Bean Validation 체크하는 라이브러리 -->
 		<dependency>
 			<groupId>javax.validation</groupId>

@@ -46,5 +46,10 @@ public class ViewsController {
 		
 		return "views/dataBinding";
 	}
+	
+	@GetMapping("fileupload")
+	public String moveToFileUpload(Model model) {
+		return "views/FileUpload";
+	}
 
 }

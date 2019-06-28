@@ -1,9 +1,0 @@
-package com.myproject.spring5.accessmodifier;
-
-import org.apache.logging.log4j.core.util.JsonUtils;
-
-private class PrivateClass {
-
-	public String publicString = "";
-	Json
-}
