@@ -28,6 +28,19 @@
 		<beans:property name="maxUploadSize" value="10485760" />
 	</beans:bean>
 	
+	<beans:bean id="simpleMappingExceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver"> 
+		<beans:property name="exceptionMappings"> 
+			<beans:map> 
+				<beans:entry key="DatabaseException" value="databaseError"/> 
+				<beans:entry key="InvalidCreditCardException" value="creditCardError"/> 
+			</beans:map> 
+		</beans:property> <!-- See note below on how this interacts with Spring Boot --> 
+		<beans:property name="defaultErrorView" value="error"/> 
+		<beans:property name="exceptionAttribute" value="ex"/> <!-- Name of logger to use to log exceptions. Unset by default, so logging disabled --> 
+		<beans:property name="warnLogCategory" value="example.MvcLogger"/> 
+	</beans:bean>
+
+
 	<context:component-scan base-package="com.myproject.spring5" />
 	
 	
